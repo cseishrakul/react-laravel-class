@@ -120,6 +120,13 @@ class UserController extends Controller
             ],404);
         }
 
+        if($resource->articles()->exists()){
+            return response()->json([
+                'sucess' => false,
+                'message' => 'Cannot delete user who has created articles',
+            ],400);
+        }
+
         $resource->delete();
         return response(status:204);
     }
